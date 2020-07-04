@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol CatchProtocol {
+    func catchData(count:Int)
+}
+
 class NextViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     
     var count = 0
+    
+    var delegate:CatchProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +32,10 @@ class NextViewController: UIViewController {
         label.text = String(count)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func back(_ sender: Any) {
+        //activate in the class that that deleagates the delegate method
+        delegate?.catchData(count: count)
+        dismiss(animated: true, completion: nil)
     }
-    */
-
 }
