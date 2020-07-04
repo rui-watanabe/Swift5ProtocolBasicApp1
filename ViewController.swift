@@ -8,13 +8,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CatchProtocol {
+    
+    @IBOutlet weak var label1: UILabel!
+    
+    var count = 0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    }
+    
+    func catchData(count: Int) {
+        label.text = String(count)
     }
 
+    @IBAction func next(_ sender: Any) {
+        performSegue(withIdentifier: "next", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.description as! NextViewController
+        nextVC.delegate = self
+    }
 
 }
 
